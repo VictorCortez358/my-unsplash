@@ -37,20 +37,19 @@ const Header = ({imageList, setImageList}) => {
     };
 
     return (
-        <div className="flex flex-row justify-between pt-6 pb-8 px-14">
-            <div className="flex flex-row items-center justify-center">
+        <div className="flex flex-col justify-between pt-6 pb-8 px-14 md:flex-row">
+            <div className="flex flex-col gap-3 items-center justify-center md:flex-row">
                 <Image src={Logo} alt="My Unsplash Logo" />
                 <Search
                     placeholder="Search the title of the image"
                     onChange={(e) => filterImages(e)}
                     style={{
                         width: 300,
-                        marginLeft: "20px",
                     }}
                     size="large"
                 />
             </div>
-            <div className="flex flex-row items-center justify-center">
+            <div className="flex flex-row items-center justify-center mt-3">
                 <Button
                     type="default"
                     onClick={showModal}

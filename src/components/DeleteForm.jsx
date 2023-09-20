@@ -32,7 +32,6 @@ const DeleteForm = ({ handleOk, handleCancel, imageList, setImageList }) => {
             name="basic"
             layout="vertical"
             onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
             autoComplete="off"
             style={{
                 marginTop: "20px",

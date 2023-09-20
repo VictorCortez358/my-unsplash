@@ -36,7 +36,7 @@ const ImagesGallery = ({ images }) => {
                         </button>
                         <p>{image.label}</p>
                     </>
-                    <img src={image.url} alt={image.label} style={{ width: "100%" }} />
+                    <img src={image.url}  alt={image.label} style={{ width: "100%" }} />
                 </div>
             ))}
             <Modal
