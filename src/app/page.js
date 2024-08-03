@@ -1,6 +1,5 @@
 import React from "react";
-import Header from "@/components/Header";
-import ImagesGallery from "@/components/ImagesGallery";
+import ImagesGallery from "../components/ImagesGallery";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();

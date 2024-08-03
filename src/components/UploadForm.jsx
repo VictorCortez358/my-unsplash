@@ -17,9 +17,6 @@ const copyToClipboard = (password) => {
     navigator.clipboard.writeText(password);
 };
 
-const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
-};
 const UploadForm = ({ handleOk, handleCancel, setImageList}) => {
     const [messageApi, contextHolder] = message.useMessage();
 
@@ -36,14 +33,18 @@ const UploadForm = ({ handleOk, handleCancel, setImageList}) => {
 
         const data = await response.json();
         setImageList((prev) => [...prev, data]);
-        if (response.ok) {
-            messageApi.open({
-                type: "success",
-                content: `This is the password: ${password} for this image and it will be copied to your clipboard, please save it!`,
-                duration: 8,
-            });
-            copyToClipboard(password);
-        } else {
+        try {
+            if (data.error) {
+                message.error(data.error);
+            } else {
+                messageApi.open({
+                    type: "success",
+                    content: `This is the password: ${password} for this image and it will be copied to your clipboard, please save it!`,
+                    duration: 8,
+                });
+                copyToClipboard(password);
+            }
+        } catch (error) {
             message.error("Something went wrong, probably the URL is not valid, your url must start with http:// or https://");
         }
     };
@@ -53,7 +54,7 @@ const UploadForm = ({ handleOk, handleCancel, setImageList}) => {
             name="basic"
             layout="vertical"
             onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
+            clearOnDestroy={true}
             autoComplete="off"
             style={{
                 marginTop: "20px",

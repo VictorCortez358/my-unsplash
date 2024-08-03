@@ -9,12 +9,11 @@ datasource db {
   provider = "postgresql"
   url = env("POSTGRES_PRISMA_URL") 
   directUrl = env("POSTGRES_URL_NON_POOLING") 
-  shadowDatabaseUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
 model Image {
   id        Int      @id @default(autoincrement())
-  url       String  @unique
+  url       String  
   label     String  @unique
   password  String  @unique 
 }

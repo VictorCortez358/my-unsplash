@@ -12,14 +12,28 @@ export async function GET() {
 
 export async function POST(request) {
     const { label, url, password } = await request.json();
-    const NewPhoto = await prisma.image.create({
-        data: {
-            label,
+
+    const filteredImages = await prisma.image.findMany({
+        where: {
             url,
-            password,
-        }
+        }  
     });
-    return NextResponse.json(NewPhoto);
+
+    if(filteredImages.length > 0){
+        return NextResponse.json({
+            error: "This image already exists",
+        });
+    }else{
+        const newPhoto = await prisma.image.create({
+            data: {
+                label,
+                url,
+                password,
+            }
+        });
+
+        return NextResponse.json(newPhoto);
+    }
 }
 
 export async function DELETE(request) {
